@@ -1,19 +1,14 @@
 def mayor_element(sequence)
 	array = []
-	the_mayor_element_is_found = false
-	the_mayor_element = 0
-	sequence.each do |number|
-		the_mayor_element = number
-		sequence.each do |num|
-			array << num if number == num
-			if array.size == (sequence.size / 2)
-				the_mayor_element_is_found = true
-				break
-			end
+	the_mayor_element = nil
+	sequence.uniq.each do |number|
+		count_number_found = sequence.find_all { |num| num == number }.size
+    	if count_number_found > (sequence.size / 2)
+			the_mayor_element = number
+			break
 		end
-		array = [] if !the_mayor_element_is_found
 	end
-	(array.size > 0) ? (the_mayor_element) : "None"
+	(the_mayor_element || "None")
 end
 
 File.open(ARGV[0]).each_line do |line|
